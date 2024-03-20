@@ -31,7 +31,7 @@ products.forEach((product) => {
       </p>
 
       <div class="product-quantity-container">
-        <select>
+        <select class="js-quantity-selector-${product.id}">
           <option selected value="1">1</option>
           <option value="2">2</option>
           <option value="3">3</option>
@@ -66,6 +66,7 @@ const addToCartBtn = document.querySelectorAll('.js-add-to-cart-button');
 addToCartBtn.forEach((button) => {
   button.addEventListener('click', () => {
     const productId = button.dataset.productId;
+    const selectorElem = document.querySelector(`.js-quantity-selector-${productId}`);
 
     let matchingItem;
     cart.forEach((item) => {
@@ -76,11 +77,11 @@ addToCartBtn.forEach((button) => {
 
     if (matchingItem) {
       // matchingItem returns an object if there exist any and object is a truthy value!
-      matchingItem.quantity++; 
+      matchingItem.quantity += Number(selectorElem.value); 
     } else {
       cart.push({
         productId: productId,
-        quantity: 1
+        quantity: Number(selectorElem.value)
       });
     }
 
@@ -90,5 +91,6 @@ addToCartBtn.forEach((button) => {
     });
     caryQuantityElem.innerHTML = caryQuantity;
 
+    // console.log(typeof Number(selectorElem.value));
   });
 });
