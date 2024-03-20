@@ -656,5 +656,36 @@ const products = [
       "apparel",
       "mens"
     ]
+  },
+  // EXER 13g
+  {
+    id: "id1",
+    image: "images/products/backpack.jpg",
+    name: "Backpack Black - Large",
+    rating: {
+      stars: 4,
+      count: 739
+    },
+    priceCents: 3200,
+    keywords: [
+      "bag",
+      "backpack",
+      "container",
+    ]
+  },
+  {
+    id: "id2",
+    image: "images/products/umbrella.jpg",
+    name: "Umbrella Black - Big",
+    rating: {
+      stars: 3.5,
+      count: 1749
+    },
+    priceCents: 1550,
+    keywords: [
+      "raincoat",
+      "umbrella",
+      "rain"
+    ]
   }
 ];
