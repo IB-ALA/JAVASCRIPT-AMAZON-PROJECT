@@ -1,4 +1,5 @@
 const productsGrid = document.querySelector('.js-products-grid');
+const caryQuantityElem = document.querySelector('.js-cart-quantity');
 
 
 // console.log(products);
@@ -60,10 +61,10 @@ products.forEach((product) => {
 
 productsGrid.innerHTML = productsHTML;
 
+
 const addToCartBtn = document.querySelectorAll('.js-add-to-cart-button');
 addToCartBtn.forEach((button) => {
   button.addEventListener('click', () => {
-    // console.log('Added product');
     const productId = button.dataset.productId;
 
     let matchingItem;
@@ -82,10 +83,12 @@ addToCartBtn.forEach((button) => {
         quantity: 1
       });
     }
-    
-    console.log(cart);
+
+    let caryQuantity = 0;
+    cart.forEach((item) => {
+      caryQuantity += item.quantity;
+    });
+    caryQuantityElem.innerHTML = caryQuantity;
 
   });
 });
-
-// console.log(productsHTML);
