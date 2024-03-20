@@ -1,6 +1,8 @@
 const productsGrid = document.querySelector('.js-products-grid');
 const caryQuantityElem = document.querySelector('.js-cart-quantity');
 
+let timeoutId;
+
 
 // console.log(products);
 
@@ -47,7 +49,7 @@ products.forEach((product) => {
 
       <div class="product-spacer"></div>
 
-      <div class="added-to-cart">
+      <div class="added-to-cart js-added-to-cart-${product.id}">
         <img src="images/icons/checkmark.png">
         Added
       </div>
@@ -69,6 +71,7 @@ addToCartBtn.forEach((button) => {
     // const productId = button.dataset.productId;
     const selectorElem = document.querySelector(`.js-quantity-selector-${productId}`);
     const quantity = Number(selectorElem.value);
+    const addedTextElem = document.querySelector(`.js-added-to-cart-${productId}`);
 
     let matchingItem;
     cart.forEach((item) => {
@@ -93,6 +96,11 @@ addToCartBtn.forEach((button) => {
     });
     caryQuantityElem.innerHTML = caryQuantity;
 
+    addedTextElem.classList.add('make-text-visible');
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => {
+      addedTextElem.classList.remove('make-text-visible');
+    }, 2000);
     // console.log(cart);
   });
 });
