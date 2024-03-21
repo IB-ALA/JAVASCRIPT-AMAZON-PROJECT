@@ -1,4 +1,4 @@
-import {cart} from '../data/cart.js';
+import {cart, addToCart} from '../data/cart.js';
 import {products} from '../data/products.js';
 
 const productsGrid = document.querySelector('.js-products-grid');
@@ -6,11 +6,9 @@ const caryQuantityElem = document.querySelector('.js-cart-quantity');
 
 let timeoutId;
 
-
 // console.log(products);
 
 let productsHTML = '';
-
 products.forEach((product) => {
   productsHTML += `
     <section class="product-container">
@@ -71,39 +69,29 @@ const addToCartBtn = document.querySelectorAll('.js-add-to-cart-button');
 addToCartBtn.forEach((button) => {
   button.addEventListener('click', () => {
     const { productId } = button.dataset;
-    // const productId = button.dataset.productId;
-    const selectorElem = document.querySelector(`.js-quantity-selector-${productId}`);
-    const quantity = Number(selectorElem.value);
-    const addedTextElem = document.querySelector(`.js-added-to-cart-${productId}`);
 
-    let matchingItem;
-    cart.forEach((item) => {
-      if (item.productId === productId) {
-        matchingItem = item;
-      }
-    });
-
-    if (matchingItem) {
-      // matchingItem returns an object if there exist any and object is a truthy value!
-      matchingItem.quantity += quantity; 
-    } else {
-      cart.push({
-        productId,
-        quantity
-      });
-    }
-
-    let caryQuantity = 0;
-    cart.forEach((item) => {
-      caryQuantity += item.quantity;
-    });
-    caryQuantityElem.innerHTML = caryQuantity;
-
-    addedTextElem.classList.add('make-text-visible');
-    clearTimeout(timeoutId);
-    timeoutId = setTimeout(() => {
-      addedTextElem.classList.remove('make-text-visible');
-    }, 2000);
-    // console.log(cart);
+    addToCart(productId);
+    updateCartQuantity();
+    displayAddedText(productId);
   });
 });
+
+
+function updateCartQuantity() {
+  let caryQuantity = 0;
+
+  cart.forEach((cartItem) => {
+    caryQuantity += cartItem.quantity;
+  });
+  caryQuantityElem.innerHTML = caryQuantity;
+}
+
+function displayAddedText(productId) {
+  const addedTextElem = document.querySelector(`.js-added-to-cart-${productId}`);
+
+  addedTextElem.classList.add('make-text-visible');
+  clearTimeout(timeoutId);
+  timeoutId = setTimeout(() => {
+    addedTextElem.classList.remove('make-text-visible');
+  }, 2000);
+}
