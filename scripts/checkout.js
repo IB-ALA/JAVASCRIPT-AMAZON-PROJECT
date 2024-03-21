@@ -1,8 +1,12 @@
-import {cart, removeFromCart} from '../data/cart.js';
+import {cart, removeFromCart, calculateQuantity} from '../data/cart.js';
 import {products} from '../data/products.js';
 import {formatCurrency} from './utils/money.js';
 
+const checkoutCartQuantityElem = document.querySelector('.js-checkout-nav-cart-quantity');
 const orderSummaryElem = document.querySelector('.js-order-summary');
+
+
+updateCartQuantity();
 
 let cartSummaryHTML = '';
 cart.forEach((cartItem) => {
@@ -108,5 +112,11 @@ deleteBtns.forEach((link) => {
     console.log(cart);
     const container = document.querySelector(`.js-cart-item-container-${productId}`);
     container.remove();
+    updateCartQuantity()
   });
 });
+
+
+function updateCartQuantity() {
+  checkoutCartQuantityElem.innerHTML = `${calculateQuantity()} items`;
+}

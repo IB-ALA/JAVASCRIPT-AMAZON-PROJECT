@@ -62,3 +62,13 @@ export function removeFromCart(productId) {
   cart = cart.filter((cartItem) => cartItem.productId !== productId);
   saveToStorage();
 }
+
+export function calculateQuantity() {
+  let caryQuantity = 0;
+
+  cart.forEach((cartItem) => {
+    caryQuantity += cartItem.quantity;
+  });
+
+  return caryQuantity;
+}
