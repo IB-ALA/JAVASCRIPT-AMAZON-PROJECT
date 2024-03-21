@@ -1,5 +1,5 @@
 import {cart} from '../data/cart.js';
-
+import {products} from '../data/products.js';
 
 const productsGrid = document.querySelector('.js-products-grid');
 const caryQuantityElem = document.querySelector('.js-cart-quantity');
