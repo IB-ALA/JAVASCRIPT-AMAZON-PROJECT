@@ -4,6 +4,9 @@ import isWeekend from './functions.js';
 // 15g
 import { isWeekend as isSatSun } from './functions.js';
 
+// CHALLENGE 15m
+import { deliveryOptions, calculateDeliveryDate, getDeliveryOption } from '../data/deliveryOptions.js';
+
 
 
 console.log('hello');
@@ -15,6 +18,8 @@ const fiveDaysAfterToday = today.add(5, 'days');
 const fiveDaysAfterTodayString = fiveDaysAfterToday.format('MMMM, D');
 
 console.log(fiveDaysAfterTodayString);
+
+
 
 // 15b
 const oneMonthAfterToday = today.add(1, 'months');
@@ -55,5 +60,45 @@ isSatSun(fiveDaysAfterToday);
 isSatSun(oneMonthAfterToday);
 isSatSun(oneMonthBeforeToday);
 
+function isWeekend2(date) {
+  const dayOfWeek = date.format('dddd');
+  return dayOfWeek;
+}
 
+const deliveryOption = getDeliveryOption('2');
+const dateString = calculateDeliveryDate(deliveryOption);
 
+console.log(dateString);
+
+function calculateDeliveryDate2(deliveryOption) {
+  // const today = dayjs();
+  const today = dayjs().add(2, 'days');
+  let deliveryDate;
+  let dateString;
+
+  let deliveryDays = deliveryOption.deliveryDays;
+  let daysCounted = deliveryDays;
+
+  let i = 1;
+  while (i <= daysCounted) {
+    if (isWeekend2(today.add(i, 'days')) !== 'Saturday' && isWeekend2(today.add(i, 'days')) !== 'Sunday') {
+      if (i === daysCounted) {
+        deliveryDate = today.add(i, 'days');
+        dateString = deliveryDate.format('dddd, MMMM D');
+      }
+
+      // i++;
+    } 
+    else {
+      daysCounted++;
+      // i++;
+    }
+
+    i++;
+  }
+
+  return dateString;
+}
+console.log(today.format('MMMM, dddd'));
+calculateDeliveryDate2(deliveryOption);
+console.log(calculateDeliveryDate2(deliveryOption));
