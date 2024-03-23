@@ -75,15 +75,16 @@ export function renderOrderSummary() {
   const saveBtns = document.querySelectorAll('.js-save-quantity-link');
   const deliveryOptionElems = document.querySelectorAll('.js-delivery-option');
 
+  updateCartQuantity();
+
   deleteBtns.forEach((link) => {
     link.addEventListener('click', () => {
       const { productId } = link.dataset;
-
       removeFromCart(productId);
       console.log(cart);
-      const container = document.querySelector(`.js-cart-item-container-${productId}`);
-      container.remove();
-      updateCartQuantity();
+      // const container = document.querySelector(`.js-cart-item-container-${productId}`);
+      // container.remove();
+      renderOrderSummary();
       renderPaymentSummary();
     });
   });
@@ -119,6 +120,7 @@ export function renderOrderSummary() {
             updateQuantity(productId, newQuantity);
             updateCartQuantity();
             quantityLabelElem.innerHTML = newQuantity;
+            renderPaymentSummary();
           } else {
             cart.forEach((cartItem) => {
               if (cartItem.productId === productId) {
@@ -146,6 +148,7 @@ export function renderOrderSummary() {
         updateQuantity(productId, newQuantity);
         updateCartQuantity();
         quantityLabelElem.innerHTML = newQuantity;
+        renderPaymentSummary();
       } else {
         cart.forEach((cartItem) => {
           if (cartItem.productId === productId) {
