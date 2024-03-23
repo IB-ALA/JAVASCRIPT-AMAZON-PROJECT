@@ -7,7 +7,6 @@ import { deliveryOptions, getDeliveryOption, calculateDeliveryDate } from '../..
 import { renderPaymentSummary } from './paymentSummary.js';
 import { renderCheckoutHeader } from './checkoutHeader.js';
 
-// const checkoutCartQuantityElem = document.querySelector('.js-checkout-nav-cart-quantity');
 const orderSummaryElem = document.querySelector('.js-order-summary');
 
 
@@ -109,7 +108,6 @@ export function renderOrderSummary() {
       quantityInputElem.addEventListener('keydown', (e) => {
         if (e.key === 'Enter') {
           const quantityInputElem = document.querySelector(`.js-quantity-input-${productId}`);
-          // const quantityLabelElem = document.querySelector(`.js-quantity-label-${productId}`);
           const newQuantity = Number(quantityInputElem.value);
 
           if (newQuantity > 0 && newQuantity < 1000) {
@@ -118,7 +116,6 @@ export function renderOrderSummary() {
             container.classList.remove('is-editing-quantity');
             updateQuantity(productId, newQuantity);
             renderOrderSummary();
-            // quantityLabelElem.innerHTML = newQuantity;
             renderPaymentSummary();
           } else {
             cart.forEach((cartItem) => {
@@ -137,16 +134,12 @@ export function renderOrderSummary() {
       const { productId } = link.dataset;
       const container = document.querySelector(`.js-cart-item-container-${productId}`);
       const quantityInputElem = document.querySelector(`.js-quantity-input-${productId}`);
-      // const quantityLabelElem = document.querySelector(`.js-quantity-label-${productId}`);
       const newQuantity = Number(quantityInputElem.value);
 
       if (newQuantity > 0 && newQuantity < 1000) {
-        console.log('valid');
-
         container.classList.remove('is-editing-quantity');
         updateQuantity(productId, newQuantity);
         renderOrderSummary();
-        // quantityLabelElem.innerHTML = newQuantity;
         renderPaymentSummary();
       } else {
         cart.forEach((cartItem) => {
@@ -170,18 +163,10 @@ export function renderOrderSummary() {
 }
 
 
-// export function updateCartQuantity() {
-//   checkoutCartQuantityElem.innerHTML = `${calculateQuantity()} items`;
-// }
-
-
 function deliveryOptionsHTML(matchingProduct, cartItem) {
   let html = '';
 
   deliveryOptions.forEach((deliveryOption) => {
-    // const today = dayjs();
-    // const deliveryDate = today.add(deliveryOption.deliveryDays, 'days');
-    // const dateString = deliveryDate.format('dddd, MMMM D');
     const dateString = calculateDeliveryDate(deliveryOption);
     const priceString = deliveryOption.priceCents === 0 ? 'FREE' : `$${formatCurrency(deliveryOption.priceCents)} -`;
 
