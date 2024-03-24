@@ -1,8 +1,8 @@
 import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js';
 // 15f
-import isWeekend from './functions.js';
+import isWeekendd from './functions.js';
 // 15g
-import { isWeekend as isSatSun } from './functions.js';
+import { isWeekendd as isSatSun } from './functions.js';
 
 // CHALLENGE 15m
 import { deliveryOptions, calculateDeliveryDate, getDeliveryOption } from '../data/deliveryOptions.js';
@@ -46,11 +46,11 @@ function isWeekend(date) {
 }
 */
 
-isWeekend(today);
-isWeekend(today.add(1, 'days'));
-isWeekend(fiveDaysAfterToday);
-isWeekend(oneMonthAfterToday);
-isWeekend(oneMonthBeforeToday);
+isWeekendd(today);
+isWeekendd(today.add(1, 'days'));
+isWeekendd(fiveDaysAfterToday);
+isWeekendd(oneMonthAfterToday);
+isWeekendd(oneMonthBeforeToday);
 
 // 15g
 
