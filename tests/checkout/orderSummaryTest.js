@@ -38,9 +38,9 @@ describe('test suite: renderOrderSummary', () => {
 
 
   // 16f
-  // afterEach(() => {
-  //   document.querySelector('.js-test-container').innerHTML = '';
-  // });
+  afterEach(() => {
+    document.querySelector('.js-test-container').innerHTML = '';
+  });
 
 
 
