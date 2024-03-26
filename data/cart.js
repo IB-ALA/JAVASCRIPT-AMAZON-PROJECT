@@ -101,6 +101,10 @@ export function updateDeliveryOptions(productId, deliveryOptionId) {
     }
   }); 
 
+  if (!matchingItem) {
+   return;
+  }
+
   matchingItem.deliveryOptionId = deliveryOptionId;
 
   saveToStorage();

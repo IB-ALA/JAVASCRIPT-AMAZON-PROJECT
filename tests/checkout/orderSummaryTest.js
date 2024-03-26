@@ -39,9 +39,9 @@ describe('test suite: renderOrderSummary', () => {
 
 
   // 16f
-  // afterEach(() => {
-  //   document.querySelector('.js-test-container').innerHTML = '';
-  // });
+  afterEach(() => {
+    document.querySelector('.js-test-container').innerHTML = '';
+  });
 
 
 
@@ -79,8 +79,6 @@ describe('test suite: renderOrderSummary', () => {
     expect(
       document.querySelector(`.js-product-price-${productId2}`).innerText
     ).toEqual(`$${formatCurrency(matchingProduct2.priceCents)}`);
-
-    document.querySelector('.js-test-container').innerHTML = '';
   });
 
 
@@ -114,8 +112,6 @@ describe('test suite: renderOrderSummary', () => {
     expect(
       document.querySelector(`.js-product-price-${productId2}`).innerText
     ).toEqual(`$${formatCurrency(matchingProduct2.priceCents)}`);
-
-    document.querySelector('.js-test-container').innerHTML = '';
   });
 
 
