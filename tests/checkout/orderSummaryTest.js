@@ -1,5 +1,7 @@
 import { renderOrderSummary } from '../../scripts/checkout/orderSummary.js';
 import { loadFromStorage, cart } from '../../data/cart.js';
+import { getProduct } from '../../data/products.js';
+import { formatCurrency } from '../../scripts/utils/money.js';
 
 describe('test suite: renderOrderSummary', () => {
 
@@ -35,6 +37,12 @@ describe('test suite: renderOrderSummary', () => {
   });
 
 
+  // 16f
+  // afterEach(() => {
+  //   document.querySelector('.js-test-container').innerHTML = '';
+  // });
+
+
 
   it('diplays the cart', () => {
     // beforeEach running here
@@ -51,7 +59,25 @@ describe('test suite: renderOrderSummary', () => {
       document.querySelector(`.js-product-quantity-${productId2}`).innerText
     ).toContain('Quantity: 1');
 
-    document.querySelector('.js-test-container').innerHTML = '';
+
+    // 16g
+    const matchingProduct1 = getProduct(productId1);
+    expect(
+      document.querySelector(`.js-product-name-${productId1}`).innerText
+    ).toEqual(`${matchingProduct1.name}`);
+
+    const matchingProduct2 = getProduct(productId2);
+    expect(
+      document.querySelector(`.js-product-name-${productId2}`).innerText
+    ).toEqual(`${matchingProduct2.name}`);
+
+    // 16h
+    expect(
+      document.querySelector(`.js-product-price-${productId1}`).innerText
+    ).toEqual(`$${formatCurrency(matchingProduct1.priceCents)}`);
+    expect(
+      document.querySelector(`.js-product-price-${productId2}`).innerText
+    ).toEqual(`$${formatCurrency(matchingProduct2.priceCents)}`);
   });
 
 
@@ -75,6 +101,15 @@ describe('test suite: renderOrderSummary', () => {
 
     expect(cart[0].productId).toEqual(productId2);
 
-    document.querySelector('.js-test-container').innerHTML = '';
+    // 16g
+    const matchingProduct2 = getProduct(productId2);
+    expect(
+      document.querySelector(`.js-product-name-${productId2}`).innerText
+    ).toEqual(`${matchingProduct2.name}`);
+
+    // 16h
+    expect(
+      document.querySelector(`.js-product-price-${productId2}`).innerText
+    ).toEqual(`$${formatCurrency(matchingProduct2.priceCents)}`);
   });
 });
