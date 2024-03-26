@@ -53,7 +53,7 @@ describe('test suite: addToCart', () => {
   });
 });
 
-
+// 16i
 describe('test suite: removeFronCart', () => {
   beforeEach(() => {
     spyOn(localStorage, 'setItem');

@@ -2,6 +2,7 @@ import { renderOrderSummary } from '../../scripts/checkout/orderSummary.js';
 import { loadFromStorage, cart } from '../../data/cart.js';
 import { getProduct } from '../../data/products.js';
 import { formatCurrency } from '../../scripts/utils/money.js';
+import { getDeliveryOption } from '../../data/deliveryOptions.js';
 
 describe('test suite: renderOrderSummary', () => {
 
@@ -38,9 +39,9 @@ describe('test suite: renderOrderSummary', () => {
 
 
   // 16f
-  afterEach(() => {
-    document.querySelector('.js-test-container').innerHTML = '';
-  });
+  // afterEach(() => {
+  //   document.querySelector('.js-test-container').innerHTML = '';
+  // });
 
 
 
@@ -78,6 +79,8 @@ describe('test suite: renderOrderSummary', () => {
     expect(
       document.querySelector(`.js-product-price-${productId2}`).innerText
     ).toEqual(`$${formatCurrency(matchingProduct2.priceCents)}`);
+
+    document.querySelector('.js-test-container').innerHTML = '';
   });
 
 
@@ -111,5 +114,33 @@ describe('test suite: renderOrderSummary', () => {
     expect(
       document.querySelector(`.js-product-price-${productId2}`).innerText
     ).toEqual(`$${formatCurrency(matchingProduct2.priceCents)}`);
+
+    document.querySelector('.js-test-container').innerHTML = '';
+  });
+
+
+  // 16j
+  it('updates deliverOption', () => {
+    renderOrderSummary();
+    document.querySelector(`.js-delivery-option-${productId1}-3`).click();
+
+    expect(
+      document.querySelector(`.delivery-option-input-${productId1}-3`).checked
+    ).toEqual(true);
+
+    expect(cart.length).toEqual(2);
+
+    expect(cart[0].deliveryOptionId).toEqual('3');
+
+
+    expect(
+      document.querySelector('.js-payment-summary-money-shipping').innerText
+    ).toEqual(`$${formatCurrency(getDeliveryOption('3').priceCents + getDeliveryOption('2').priceCents)}`);
+
+
+    expect(
+      document.querySelector('.js-payment-summary-money-total').innerText
+    ).toEqual('$63.50');
+
   });
 });
