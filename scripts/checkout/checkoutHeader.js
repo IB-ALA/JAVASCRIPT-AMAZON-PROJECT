@@ -9,5 +9,6 @@ export function renderCheckoutHeader() {
       href="amazon.html">${calculateQuantity()} items</a>)
   `;
 
-  checkoutHeaderMidSecElem.innerHTML = html;
+  // checkoutHeaderMidSecElem.innerHTML = html;
+  document.querySelector('.js-checkout-header-middle-section').innerHTML = html;
 }
