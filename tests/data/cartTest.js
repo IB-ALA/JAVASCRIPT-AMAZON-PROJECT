@@ -197,4 +197,28 @@ describe('test suite: updateDeliveryOption', () => {
       ]
     ));
   });
+
+  // 16m
+  it('use a deliveryOptionId that does not exist', () => {
+    updateDeliveryOptions(productId1, 'not-an-option');
+
+    expect(localStorage.setItem).toHaveBeenCalledTimes(0);
+
+    expect(localStorage.setItem).not.toHaveBeenCalledWith('cart', JSON.stringify(
+      [
+        {
+          productId: 'e43638ce-6aa0-4b85-b27f-e1d07eb678c6',
+          quantity: 2,
+          deliveryOptionId: '1'
+        },
+        {
+          productId: '15b6fc6f-327a-4ec4-896f-486349e85a3d',
+          quantity: 1,
+          deliveryOptionId: '2'
+        }
+      ]
+    ));
+
+    expect(cart[0].deliveryOptionId).toEqual('1');
+  });
 });
