@@ -6,7 +6,7 @@ export function renderCheckoutHeader() {
 
   let html = `
     Checkout (<a class="return-to-home-link js-checkout-nav-cart-quantity"
-      href="amazon.html">${calculateQuantity()} items</a>)
+      href="amazon.html">${calculateQuantity()} ${calculateQuantity() === 1 ? 'item' : 'items'}</a>)
   `;
 
   // checkoutHeaderMidSecElem.innerHTML = html;

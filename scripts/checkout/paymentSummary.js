@@ -1,8 +1,7 @@
-import { cart } from '../../data/cart.js';
+import { cart, calculateQuantity } from '../../data/cart.js';
 import { getProduct } from '../../data/products.js';
 import formatCurrency from '../utils/money.js';
 import { getDeliveryOption } from '../../data/deliveryOptions.js';
-import { calculateQuantity } from '../../data/cart.js';
 
 
 const paymentSummaryElem = document.querySelector('.js-payment-summary');
