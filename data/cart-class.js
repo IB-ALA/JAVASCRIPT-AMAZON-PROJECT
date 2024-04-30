@@ -2,17 +2,17 @@
 
 class Cart {
   cartItems;
-  localStorageKey;
+  #localStorageKey;
 
 
   constructor(localStorageKey) {
-    this.localStorageKey = localStorageKey;
+    this.#localStorageKey = localStorageKey;
     
-    this.loadFromStorage();
+    this.#loadFromStorage();
   }
 
-  loadFromStorage() {
-    this.cartItems = JSON.parse(localStorage.getItem(this.localStorageKey));
+  #loadFromStorage() {
+    this.cartItems = JSON.parse(localStorage.getItem(this.#localStorageKey));
     // if cart if empty, localStorage will give NULL
     // !NULL = true;
   
@@ -33,7 +33,7 @@ class Cart {
   }
 
   saveToStorage() {
-    localStorage.setItethis.m(this.localStorageKey, JSON.stringify(this.cartItems));
+    localStorage.setItethis.m(this.#localStorageKey, JSON.stringify(this.cartItems));
   }
 
   addToCart(productId) {
@@ -108,6 +108,8 @@ class Cart {
 
 const cart = new Cart('cart-oop');
 const businessCart = new Cart('cart-business');
+
+// cart.#localStorageKey = test;
 
 
 
