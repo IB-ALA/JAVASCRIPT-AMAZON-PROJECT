@@ -16,9 +16,6 @@ export function getProduct(productId) {
 
 
 class Product {
-
-
-
   id;
   image;
   name;
@@ -39,6 +36,30 @@ class Product {
 
   getPrice() {
     return `$${formatCurrency(this.priceCents)}`;
+  }
+
+  extraInfoHTML() {
+    return '';
+  }
+}
+
+
+class Clothing extends Product {
+  sizeChartLink;
+
+  constructor(productDetails) {
+    super(productDetails);
+    this.sizeChartLink = productDetails.sizeChartLink;
+    this.type = productDetails.type; 
+  }
+
+  extraInfoHTML() {
+    // super.extraInfoHTML();
+    return `
+      <a href="${this.sizeChartLink}" target="_blank">
+        Size chart
+      </a>
+    `;
   }
 }
 
@@ -733,4 +754,10 @@ export const products = [
       "rain"
     ]
   }
-].map(productDetails => new Product(productDetails));
+].map(productDetails => {
+  if (productDetails.type === 'clothing') {
+    return new Clothing(productDetails);
+  } 
+  return new Product(productDetails);
+
+} );
