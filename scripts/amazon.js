@@ -6,6 +6,7 @@ const productsGrid = document.querySelector('.js-products-grid');
 const caryQuantityElem = document.querySelector('.js-cart-quantity');
 
 let timeoutId;
+let prevProductId = 'none';
 
 updateCartQuantity();
 
@@ -90,8 +91,13 @@ function displayAddedText(productId) {
   const addedTextElem = document.querySelector(`.js-added-to-cart-${productId}`);
 
   addedTextElem.classList.add('make-text-visible');
-  clearTimeout(timeoutId);
+
+  if (prevProductId === productId) {
+    clearTimeout(timeoutId); 
+  }
   timeoutId = setTimeout(() => {
     addedTextElem.classList.remove('make-text-visible');
   }, 2000);
+
+  prevProductId = productId;
 }
