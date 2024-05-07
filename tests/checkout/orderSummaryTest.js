@@ -1,7 +1,7 @@
 import { renderOrderSummary } from '../../scripts/checkout/orderSummary.js';
 // import { loadFromStorage, cart } from '../../data/cart.js';
 import { cart } from '../../data/cart-class.js';
-import { getProduct, loadProducts } from '../../data/products.js';
+import { getProduct, loadProducts, loadProductsFetch } from '../../data/products.js';
 import { formatCurrency } from '../../scripts/utils/money.js';
 import { getDeliveryOption } from '../../data/deliveryOptions.js';
 
@@ -40,7 +40,8 @@ describe('test suite: renderOrderSummary', () => {
   });
 
   beforeAll((done) => {
-    loadProducts(() => {
+    loadProductsFetch()
+    .then(() => {
       done();
     });
   });
