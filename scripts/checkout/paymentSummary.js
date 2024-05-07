@@ -27,11 +27,11 @@ export function renderPaymentSummary() {
   const taxCents = totalBeforeTaxCents * 0.1;
   const totalCents = totalBeforeTaxCents + taxCents;
 
-  console.log(formatCurrency(productPriceCents));
-  console.log(shippingPriceCents);
-  console.log(totalBeforeTaxCents);
-  console.log(taxCents);
-  console.log(totalCents);
+  // console.log(formatCurrency(productPriceCents));
+  // console.log(shippingPriceCents);
+  // console.log(totalBeforeTaxCents);
+  // console.log(taxCents);
+  // console.log(totalCents);
 
   const html = `
     <p class="payment-summary-title">
