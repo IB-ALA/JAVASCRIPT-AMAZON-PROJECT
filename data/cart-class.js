@@ -1,3 +1,6 @@
+import { getDeliveryOption } from './deliveryOptions.js';
+
+
 
 
 class Cart {
@@ -33,7 +36,7 @@ class Cart {
   }
 
   saveToStorage() {
-    localStorage.setItethis.m(this.#localStorageKey, JSON.stringify(this.cartItems));
+    localStorage.setItem(this.#localStorageKey, JSON.stringify(this.cartItems));
   }
 
   addToCart(productId) {
@@ -105,22 +108,19 @@ class Cart {
   }
 }
 
+export const cart = new Cart('cart');
 
-const cart = new Cart('cart-oop');
-const businessCart = new Cart('cart-business');
+// const cart = new Cart('cart-oop');
+// const businessCart = new Cart('cart-business');
 
 // cart.#localStorageKey = test;
-
 
 
 // localStorage.clear();
 
 // import { cart } from './cart.js';
-import { getDeliveryOption } from './deliveryOptions.js';
 
+// console.log(cart);
+// console.log(businessCart);
 
-
-console.log(cart);
-console.log(businessCart);
-
-console.log(businessCart instanceof Cart);
+// console.log(businessCart instanceof Cart);
