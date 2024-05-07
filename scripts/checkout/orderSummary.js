@@ -1,4 +1,5 @@
-import {cart, removeFromCart, updateQuantity, updateDeliveryOptions} from '../../data/cart.js';
+// import {cart, removeFromCart, updateQuantity, updateDeliveryOptions} from '../../data/cart.js';
+import { cart } from '../../data/cart-class.js';
 import {getProduct} from '../../data/products.js';
 import {formatCurrency} from '../utils/money.js';
 import {hello} from 'https://unpkg.com/supersimpledev@1.0.1/hello.esm.js';
@@ -12,7 +13,7 @@ const orderSummaryElem = document.querySelector('.js-order-summary');
 
 export function renderOrderSummary() {
   let cartSummaryHTML = '';
-  cart.forEach((cartItem) => {
+  cart.cartItems.forEach((cartItem) => {
     const { productId } = cartItem;
 
     const matchingProduct = getProduct(productId);
@@ -84,7 +85,7 @@ export function renderOrderSummary() {
   deleteBtns.forEach((link) => {
     link.addEventListener('click', () => {
       const { productId } = link.dataset;
-      removeFromCart(productId);
+      cart.removeFromCart(productId);
       console.log(cart);
       // const container = document.querySelector(`.js-cart-item-container-${productId}`);
       // container.remove();
@@ -103,7 +104,7 @@ export function renderOrderSummary() {
       // added this myself
       const quantityInputElem = document.querySelector(`.js-quantity-input-${productId}`);
       quantityInputElem.focus();
-      cart.forEach((cartItem) => {
+      cart.cartItems.forEach((cartItem) => {
         if (cartItem.productId === productId) {
           quantityInputElem.value = cartItem.quantity;
         }
@@ -120,11 +121,11 @@ export function renderOrderSummary() {
             console.log('valid');
       
             container.classList.remove('is-editing-quantity');
-            updateQuantity(productId, newQuantity);
+            cart.updateQuantity(productId, newQuantity);
             renderOrderSummary();
             renderPaymentSummary();
           } else {
-            cart.forEach((cartItem) => {
+            cart.cartItems.forEach((cartItem) => {
               if (cartItem.productId === productId) {
                 quantityInputElem.value = cartItem.quantity;
               }
@@ -144,11 +145,11 @@ export function renderOrderSummary() {
 
       if (newQuantity > 0 && newQuantity < 1000) {
         container.classList.remove('is-editing-quantity');
-        updateQuantity(productId, newQuantity);
+        cart.updateQuantity(productId, newQuantity);
         renderOrderSummary();
         renderPaymentSummary();
       } else {
-        cart.forEach((cartItem) => {
+        cart.cartItems.forEach((cartItem) => {
           if (cartItem.productId === productId) {
             quantityInputElem.value = cartItem.quantity;
           }
@@ -161,7 +162,7 @@ export function renderOrderSummary() {
     element.addEventListener('click', () => {
       const {productId, deliveryOptionId} = element.dataset;
 
-      updateDeliveryOptions(productId, deliveryOptionId);
+      cart.updateDeliveryOptions(productId, deliveryOptionId);
       renderOrderSummary();
       renderPaymentSummary();
     });

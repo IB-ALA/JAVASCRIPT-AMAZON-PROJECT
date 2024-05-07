@@ -1,4 +1,5 @@
-import { calculateQuantity } from '../../data/cart.js';
+// import { calculateQuantity } from '../../data/cart.js';
+import { cart } from '../../data/cart-class.js';
 
 
 export function renderCheckoutHeader() {
@@ -6,7 +7,7 @@ export function renderCheckoutHeader() {
 
   let html = `
     Checkout (<a class="return-to-home-link js-checkout-nav-cart-quantity"
-      href="amazon.html">${calculateQuantity()} ${calculateQuantity() === 1 ? 'item' : 'items'}</a>)
+      href="amazon.html">${cart.calculateQuantity()} ${cart.calculateQuantity() === 1 ? 'item' : 'items'}</a>)
   `;
 
   // checkoutHeaderMidSecElem.innerHTML = html;

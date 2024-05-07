@@ -1,12 +1,12 @@
-import {cart, addToCart, calculateQuantity} from '../data/cart.js';
+// import {cart, addToCart, calculateQuantity} from '../data/cart.js';
+import { cart } from '../data/cart-class.js';
 import {products} from '../data/products.js';
-import {formatCurrency} from './utils/money.js';
+// import {formatCurrency} from './utils/money.js';
 
 const productsGrid = document.querySelector('.js-products-grid');
 const caryQuantityElem = document.querySelector('.js-cart-quantity');
 
 let timeoutId;
-let prevProductId = 'none';
 
 updateCartQuantity();
 
@@ -76,7 +76,7 @@ addToCartBtn.forEach((button) => {
   button.addEventListener('click', () => {
     const { productId } = button.dataset;
 
-    addToCart(productId);
+    cart.addToCart(productId);
     updateCartQuantity();
     displayAddedText(productId);
   });
@@ -84,20 +84,15 @@ addToCartBtn.forEach((button) => {
 
 
 function updateCartQuantity() {
-  caryQuantityElem.innerHTML = calculateQuantity();
+  caryQuantityElem.innerHTML = cart.calculateQuantity();
 }
 
 function displayAddedText(productId) {
   const addedTextElem = document.querySelector(`.js-added-to-cart-${productId}`);
 
   addedTextElem.classList.add('make-text-visible');
-
-  if (prevProductId === productId) {
-    clearTimeout(timeoutId); 
-  }
+  clearTimeout(timeoutId);
   timeoutId = setTimeout(() => {
     addedTextElem.classList.remove('make-text-visible');
   }, 2000);
-
-  prevProductId = productId;
 }
