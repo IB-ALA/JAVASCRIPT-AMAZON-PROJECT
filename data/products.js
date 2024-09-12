@@ -30,6 +30,10 @@ export class Product {
     this.priceCents = productDetails.priceCents;
   }
 
+  getImage() {
+    return this.image;
+  }
+
   getStarsUrl() {
     return `images/ratings/rating-${this.rating.stars * 10}.png`;
   }

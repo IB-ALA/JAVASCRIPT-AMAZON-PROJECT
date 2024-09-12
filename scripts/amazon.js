@@ -1,12 +1,18 @@
 // import {cart, addToCart, calculateQuantity} from '../data/cart.js';
 import { cart } from '../data/cart-class.js';
-import { products, loadProducts } from '../data/products.js';
+import { products, loadProductsFetch } from '../data/products.js';
 // import {formatCurrency} from './utils/money.js';
 
 const productsGrid = document.querySelector('.js-products-grid');
 const caryQuantityElem = document.querySelector('.js-cart-quantity');
 
-loadProducts(renderProductsGrid);
+
+try {
+  await loadProductsFetch();
+  renderProductsGrid();
+} catch (error) {
+  console.log(error);
+}
 
 let timeoutId;
 
