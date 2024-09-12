@@ -6,10 +6,15 @@ import { products, loadProductsFetch } from '../data/products.js';
 const productsGrid = document.querySelector('.js-products-grid');
 const caryQuantityElem = document.querySelector('.js-cart-quantity');
 
+document.querySelector('.js-search-button').addEventListener('click', () => {
+  const productsToSearch = document.querySelector('.js-search-bar').value;
+  window.location.href = `amazon.html?search=${productsToSearch}`
+});
 
 try {
   await loadProductsFetch();
-  renderProductsGrid();
+  // renderProductsGrid(products);
+  loadPage();
 } catch (error) {
   console.log(error);
 }
@@ -20,7 +25,7 @@ updateCartQuantity();
 
 // console.log(products);
 
-function renderProductsGrid() {
+function renderProductsGrid(products) {
   let productsHTML = '';
 
   products.forEach((product) => {
@@ -94,6 +99,30 @@ function renderProductsGrid() {
 }
 
 
+function loadPage() {
+
+  // CHECK FOR SEARCH PARAMS.
+  const url = new URL(window.location.href);
+  const productsToSearch = url.searchParams.get('search');
+  if (productsToSearch) {
+    console.log('yes');
+    const newProducts = products.filter((product) => {
+      return product.name.includes(productsToSearch);
+    });
+    // console.log(newProducts);
+    
+    if (newProducts.length > 0) {
+      renderProductsGrid(newProducts);
+    } else {
+      productsGrid.innerHTML =  `<p style="width: 100%; text-align: center;">No Products Found For '${productsToSearch}'</p>`
+    }
+  
+  } else {
+    console.log('no');
+    renderProductsGrid(products);
+  }
+  
+}
 
 
 
