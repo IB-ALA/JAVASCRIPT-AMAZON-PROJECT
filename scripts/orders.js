@@ -1,6 +1,6 @@
 
 import { cart } from '../data/cart-class.js';
-import { MMMMDDDateFormat } from '../data/deliveryOptions.js';
+import { formatDate } from '../data/deliveryOptions.js';
 import { getOrdersFromStorage } from '../data/orders.js';
 import { getProduct, loadProductsFetch } from '../data/products.js';
 import formatCurrency from './utils/money.js';
@@ -36,7 +36,7 @@ function renderOrders() {
             ${productDetails.name}
           </p>
           <p class="product-delivery-date">
-            Arriving on: ${MMMMDDDateFormat(estimatedDeliveryTime)}
+            Arriving on: ${formatDate(estimatedDeliveryTime, 'MMMM DD')}
           </p>
           <p class="product-quantity">
             Quantity: ${quantity}
@@ -64,7 +64,7 @@ function renderOrders() {
           <div class="order-header-left-section">
             <div class="order-date">
               <p class="order-header-label">Order Placed:</p>
-              <p>${MMMMDDDateFormat(orderTime)}</p>
+              <p>${formatDate(orderTime, 'MMMM DD')}</p>
             </div>
             <div class="order-total">
               <p class="order-header-label">Total:</p>

@@ -61,13 +61,7 @@ function isAWeekend(date) {
   return dayOfWeek;
 }
 
-export function MMMMDDDateFormat(date) {
-  // const today = dayjs();
-  return dayjs(date).format('MMMM DD');
-}
-
 export function formatDate(date, format) {
-  // const today = dayjs();
   return dayjs(date).format(format);
 }
 
