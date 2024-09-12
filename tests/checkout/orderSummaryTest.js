@@ -39,11 +39,8 @@ describe('test suite: renderOrderSummary', () => {
     document.querySelector('.js-test-container').innerHTML = '';
   });
 
-  beforeAll((done) => {
-    loadProductsFetch()
-    .then(() => {
-      done();
-    });
+  beforeAll( async () => {
+    await loadProductsFetch();
   });
 
 
