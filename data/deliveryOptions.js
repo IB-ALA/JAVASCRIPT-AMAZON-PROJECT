@@ -66,6 +66,19 @@ export function MMMMDDDateFormat(date) {
   return dayjs(date).format('MMMM DD');
 }
 
+export function formatDate(date, format) {
+  // const today = dayjs();
+  return dayjs(date).format(format);
+}
+
+export function calculateDeliveryProgressPercent(orderTime, deliveryTime) {
+  const currentTime = dayjs();
+  orderTime = dayjs(orderTime);
+  deliveryTime = dayjs(deliveryTime);
+
+  return ((currentTime - orderTime) / (deliveryTime - orderTime)) * 100;
+}
+
 
 // CALCULATES DATES WITH WEEKENDS!
 /*
